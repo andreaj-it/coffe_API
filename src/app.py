@@ -13,7 +13,7 @@ def hello_flask():
 def show_home():
     return render_template('Index.html')
 
-@app.route('/<string:country>/<string:variety>/<float: aroma>/<float: aftertaste>/<float: acidity>/<float: body>/<float: balance>/<float: moisture>/')
+@app.route('/<string:country>/<string:variety>/<float:aroma>/<float:aftertaste>/<float:acidity>/<float:body>/<float:balance>/<float:moisture>/')
 
 def result(country,variety,aroma,aftertaste,acidity,body,balance,moisture):
     cols = ['country_of_origin','variety','aroma','aftertaste','acidity','body','balance','moisture']
@@ -25,7 +25,7 @@ def result(country,variety,aroma,aftertaste,acidity,body,balance,moisture):
     if text_result == 'Yes':
         return jsonify(message='Es un cafe de primera.'),200
     else : 
-        return jsonify(message = 'No es cafe de primera')
+        return jsonify(message = 'No es cafe de primera.')
 
 
 #@app.route('/url_variables/<string: name>/<int: age>')
@@ -39,3 +39,5 @@ def result(country,variety,aroma,aftertaste,acidity,body,balance,moisture):
 if __name__ == '__main__':
     app.run(debug= True, host='127.0.0.1', port=5000) 
 
+#tengo q tener la opcion de ventanas emerentes para q levante,
+#luego le paso por la url los valores tipo: urlxxx.io/Guatemala/Bourbon/7.83/7.77/7.33/7.67/7.77/0.11
