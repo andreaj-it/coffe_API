@@ -11,7 +11,7 @@ def hello_flask():
 
 @app.route('/inicio')
 def show_home():
-    return render_template('Index.html')
+    return 'Hello world'
 
 @app.route('/<string:country>/<string:variety>/<float:aroma>/<float:aftertaste>/<float:acidity>/<float:body>/<float:balance>/<float:moisture>/')
 
