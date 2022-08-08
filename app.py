@@ -19,7 +19,7 @@ def result(country,variety,aroma,aftertaste,acidity,body,balance,moisture):
     cols = ['country_of_origin','variety','aroma','aftertaste','acidity','body','balance','moisture']
     data = [country,variety,aroma,aftertaste,acidity,body,balance,moisture]
     posted = pd.DataFrame(np.array(data).reshape(1,8), columns=cols) #fila con 8 columnas, lo q va a recibir
-    loaded_model = pickle.load(open('../models/coffee_model.pkl', 'rb')) #rb = read binario
+    loaded_model = pickle.load(open('coffee_model.pkl', 'rb')) #rb = read binario
     result = loaded_model.predict(posted)
     text_result = result.tolist()[0]
     if text_result == 'Yes':
