@@ -3,18 +3,30 @@ import pickle
 import pandas as pd
 import numpy as np
 
-app = Flask(__name__) # hacer ref al nombre del archivo
+app = Flask(__name__)
+model = pickle.load(open('coffee_model.pkl', 'rb'))
 
 @app.route('/')
-def hello_flask():
-    return 'Hello Flask'
 
-@app.route('/inicio')
-def show_home():
-    return 'Hello world'
+def home():
+    return render_template('index.html')
 
+@app.route('/predict', methods=['POST'])
+
+def predict():
+    '''
+    For rendering results on HTML GUI
+    '''
+    int_features = [int(x) for x in request.form.values()]
+    final_features = [np.array(int_features)]
+    prediction = model.predict(final_features)
+
+    output = round(prediction[0], 2)
+
+    return render_template('index.html', prediction_text='Como es el cafe? {} (Yes=Es un cafe de primera, No=No es cafe de primera)'.format(output))
+
+"""
 @app.route('/<string:country>/<string:variety>/<float:aroma>/<float:aftertaste>/<float:acidity>/<float:body>/<float:balance>/<float:moisture>/')
-
 def result(country,variety,aroma,aftertaste,acidity,body,balance,moisture):
     cols = ['country_of_origin','variety','aroma','aftertaste','acidity','body','balance','moisture']
     data = [country,variety,aroma,aftertaste,acidity,body,balance,moisture]
@@ -26,21 +38,7 @@ def result(country,variety,aroma,aftertaste,acidity,body,balance,moisture):
         return jsonify(message='Es un cafe de primera.'),200
     else : 
         return jsonify(message = 'No es cafe de primera.')
+"""
 
-
-#@app.route('/url_variables/<string: name>/<int: age>')
-#def url_variables(name,age):
-#    if age < 18:
-#        return jsonify(message = 'Lo siento' + name + 'no estas autorizado'), 401
-#    else:
-#        return jsonify(message = 'Bienvenido' + name), 200 # por default es 200
-#https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
-#     
-if __name__ == '__main__':
-    app.run(debug= True, host='127.0.0.1', port=5000) 
-
-#tengo q tener la opcion de ventanas emerentes para q levante,
-#luego le paso por la url los valores tipo: urlxxx.io/Guatemala/Bourbon/7.83/7.77/7.33/7.67/7.77/0.11
-
-#tenemos q montar un server web en heroku, web: gunicorn app:app
-#tengo q montar mi estructura en heroku
+if __name__=="__main__":
+    app.run(port=5000, debug=True)

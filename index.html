@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Prediccion de Café {% endblock %}</h1>
+{% endblock %}
+
+<form name="prediction" id="prediction" method="post">
+<label for="Sex">Country</label>
+    <input type="text" id="country" name="country">
+
+<label for="Sex">Variety</label>
+<input type="text" id="variety" name="variety">
+
+<label for="Sex">Aroma</label>
+<input type="text" id="aroma" name="aroma">
+
+<label for="Sex">Aftertaste</label>
+<input type="text" id="aftertaste" name="aftertaste">
+
+<label for="Sex">Acidity</label>
+<input type="text" id="acidity" name="acidity">
+
+<label for="Sex">Body</label>
+<input type="text" id="body" name="body">
+
+<label for="Sex">Balance</label>
+<input type="text" id="balance" name="balance">
+
+<label for="Sex">Moisture</label>
+<input type="text" id="moisture" name="moisture">
+
+<button type="submit" id="predict" name="predict" value="Predict"></button>
+</form>
+
+    
